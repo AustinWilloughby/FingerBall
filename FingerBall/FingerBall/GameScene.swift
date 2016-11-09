@@ -13,6 +13,17 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    private var sceneManager:GameViewController?
+    
+    init(size:CGSize, sceneManager:GameViewController)
+    {
+        self.sceneManager = sceneManager
+        super.init(size:size)
+    }
+    
+    required init?(coder aDecoder: NSCoder){
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func didMove(to view: SKView) {
         
