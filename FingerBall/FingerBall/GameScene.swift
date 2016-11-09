@@ -13,12 +13,13 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
-    private var sceneManager:GameViewController?
+    private var sceneManager:GameViewController
     
-    init(size:CGSize, sceneManager:GameViewController)
+    init(size:CGSize, scaleMode:SKSceneScaleMode, sceneManager:GameViewController)
     {
         self.sceneManager = sceneManager
         super.init(size:size)
+        self.scaleMode = scaleMode
     }
     
     required init?(coder aDecoder: NSCoder){
