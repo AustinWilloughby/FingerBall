@@ -13,34 +13,50 @@ class GameScene: SKScene {
     
     private var leftFlipper : SKSpriteNode?
     private var rightFlipper : SKSpriteNode?
+    private var ball: SKSpriteNode?
+    
+    private var ballHit : Bool?
+    private var leftFlipped : Bool?
+    private var rightFlipped : Bool?
     
     override func didMove(to view: SKView) {
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
         rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
+        ball = self.childNode(withName: "Ball") as? SKSpriteNode
+        
+        ballHit = false;
+        leftFlipped = false;
+        rightFlipped = false;
     }
     
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if pos.y < UIScreen.main.bounds.height * 0.2{
-            if pos.x < UIScreen.main.bounds.width * 0.5 {
+        if pos.y < UIScreen.main.bounds.height * 0.8{
+            if pos.x < UIScreen.main.bounds.width * 0.5 && leftFlipped == false {
                 //Left bumper
                 let rotateLeftUp = SKAction.rotate(byAngle: 1, duration: 0.06)
                 rotateLeftUp.timingMode = SKActionTimingMode.easeOut
                 let rotateLeftDown = SKAction.rotate(byAngle: -1, duration: 0.06)
                 rotateLeftDown.timingMode = SKActionTimingMode.easeOut
-                leftFlipper?.run(SKAction.sequence([rotateLeftUp, rotateLeftDown]))
+                leftFlipper?.run(rotateLeftUp, completion: {
+                    self.leftFlipper?.run(rotateLeftDown, completion:
+                        {self.leftFlipped = false})
+                })
             }
-            else{
+            else if pos.x > UIScreen.main.bounds.width * 0.5 && rightFlipped == false {
                  //Right bumper
                 let rotateRightUp = SKAction.rotate(byAngle: -1, duration: 0.06)
                 rotateRightUp.timingMode = SKActionTimingMode.easeOut
                 let rotateRightDown = SKAction.rotate(byAngle: 1, duration: 0.06)
                 rotateRightDown.timingMode = SKActionTimingMode.easeOut
-                rightFlipper?.run(SKAction.sequence([rotateRightUp, rotateRightDown]))
+                rightFlipper?.run(rotateRightUp, completion: {
+                    self.rightFlipper?.run(rotateRightDown, completion:
+                        {self.rightFlipped = false})
+                })
             }
         }
-        var touchedNode = self.nodes(at: pos)
+        let touchedNode = self.nodes(at: pos)
         if touchedNode.count > 0{
             for node in touchedNode {
                 if node.name == "Bumper"{
@@ -87,5 +103,12 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
+        
+        //CHECK FOR COLLISIONS WITH FLIPPERS WHILE THEY ARE FLIPPED. IF SO, SET BALL HIT TO TRUE
+        if ballHit == true{
+            self.ball?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
+            ballHit = false
+        }
     }
 }
