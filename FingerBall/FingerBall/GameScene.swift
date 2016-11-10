@@ -11,62 +11,64 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    private var leftFlipper : SKSpriteNode?
+    private var rightFlipper : SKSpriteNode?
     
     override func didMove(to view: SKView) {
-        
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+        leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
+        rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
     }
     
     
+    
     func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
+        if pos.y < UIScreen.main.bounds.height * 0.2{
+            if pos.x < UIScreen.main.bounds.width * 0.5 {
+                //Left bumper
+                let rotateLeftUp = SKAction.rotate(byAngle: 1, duration: 0.06)
+                rotateLeftUp.timingMode = SKActionTimingMode.easeOut
+                let rotateLeftDown = SKAction.rotate(byAngle: -1, duration: 0.06)
+                rotateLeftDown.timingMode = SKActionTimingMode.easeOut
+                leftFlipper?.run(SKAction.sequence([rotateLeftUp, rotateLeftDown]))
+            }
+            else{
+                 //Right bumper
+                let rotateRightUp = SKAction.rotate(byAngle: -1, duration: 0.06)
+                rotateRightUp.timingMode = SKActionTimingMode.easeOut
+                let rotateRightDown = SKAction.rotate(byAngle: 1, duration: 0.06)
+                rotateRightDown.timingMode = SKActionTimingMode.easeOut
+                rightFlipper?.run(SKAction.sequence([rotateRightUp, rotateRightDown]))
+            }
+        }
+        var touchedNode = self.nodes(at: pos)
+        if touchedNode.count > 0{
+            for node in touchedNode {
+                if node.name == "Bumper"{
+                    node.alpha = 1
+                    node.physicsBody = SKPhysicsBody(circleOfRadius: node.frame.width / 2.2)
+                    node.physicsBody?.isDynamic = false
+                    node.physicsBody?.affectedByGravity = false
+                    node.physicsBody?.allowsRotation = false
+                }
+            }
         }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
+        
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
+        for node in self.children {
+            if node.name == "Bumper"{
+                node.alpha = 0.3
+                node.physicsBody = nil
+            }
         }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
