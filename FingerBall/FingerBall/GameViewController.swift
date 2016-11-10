@@ -12,13 +12,6 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
-    // MARK: - ivars -
-    var gameScene: GameScene?
-    var skView: SKView!
-    let showDebugData = true
-    let screenSize = CGSize(width: 1080, height: 1920) // iPhone 6+, 16:9 (1.77) aspect ratio
-    let scaleMode = SKSceneScaleMode.aspectFill
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +26,7 @@ class GameViewController: UIViewController {
             }
             
             view.ignoresSiblingOrder = true
+            
             view.showsFPS = true
             view.showsNodeCount = true
         }
@@ -57,17 +51,5 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-    
-    func loadHomeScene(){
-        let scene = HomeScene(size: screenSize, scaleMode:scaleMode, sceneManager:self)
-        let reveal = SKTransition.crossFade(withDuration: 0.7)
-        skView.presentScene(scene, transition: reveal)
-    }
-    
-    func loadGameScene(){
-        let scene = GameScene(size:screenSize, sceneManager:self)
-        let reveal = SKTransition.crossFade(withDuration: 0.7)
-        skView.presentScene(scene, transition: reveal)
     }
 }
