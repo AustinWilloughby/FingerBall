@@ -111,4 +111,31 @@ class GameScene: SKScene {
             ballHit = false
         }
     }
+    
+    func didBegin(_ contact: SKPhysicsContact){
+        if contact.bodyA.node?.name == "Ball"{
+            collisionBetween(ball: contact.bodyA.node!, other: contact.bodyB.node!)
+        }
+        else if contact.bodyB.node?.name == "Ball"{
+            collisionBetween(ball: contact.bodyB.node!, other: contact.bodyA.node!)
+        }
+    }
+    
+    func collisionBetween(ball: SKNode, other: SKNode){
+        switch other.name!{
+            case "RightCollider":
+                if rightFlipped == true{
+                    ballHit = true
+                }
+                break
+            
+            case "LeftCollider":
+                if leftFlipped == true{
+                    ballHit = true
+                }
+                break
+            
+            default: break
+        }
+    }
 }
