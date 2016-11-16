@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F2840841DDD18710027DD93 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2840831DDD18710027DD93 /* HomeScene.swift */; };
+		3F2840861DDD18D70027DD93 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2840851DDD18D70027DD93 /* GameData.swift */; };
+		3F2840881DDD228C0027DD93 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2840871DDD228C0027DD93 /* GameOverScene.swift */; };
 		3F7C5B101DD3BCF600392A91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C5B0F1DD3BCF600392A91 /* AppDelegate.swift */; };
 		3F7C5B121DD3BCF700392A91 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C5B111DD3BCF700392A91 /* GameScene.sks */; };
 		3F7C5B141DD3BCF700392A91 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C5B131DD3BCF700392A91 /* Actions.sks */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F2840831DDD18710027DD93 /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
+		3F2840851DDD18D70027DD93 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		3F2840871DDD228C0027DD93 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		3F7C5B0C1DD3BCF600392A91 /* FingerBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FingerBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7C5B0F1DD3BCF600392A91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F7C5B111DD3BCF700392A91 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -67,6 +73,7 @@
 				3F7C5B191DD3BCF700392A91 /* Main.storyboard */,
 				3F7C5B1E1DD3BCF800392A91 /* LaunchScreen.storyboard */,
 				3F7C5B211DD3BCF800392A91 /* Info.plist */,
+				3F2840851DDD18D70027DD93 /* GameData.swift */,
 			);
 			path = FingerBall;
 			sourceTree = "<group>";
@@ -77,6 +84,8 @@
 				3F7C5B131DD3BCF700392A91 /* Actions.sks */,
 				3F7C5B111DD3BCF700392A91 /* GameScene.sks */,
 				3F7C5B151DD3BCF700392A91 /* GameScene.swift */,
+				3F2840831DDD18710027DD93 /* HomeScene.swift */,
+				3F2840871DDD228C0027DD93 /* GameOverScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -121,7 +130,7 @@
 				TargetAttributes = {
 					3F7C5B0B1DD3BCF600392A91 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = P5F2W7RU5W;
+						DevelopmentTeam = V3GKW447FR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -165,7 +174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7C5B161DD3BCF700392A91 /* GameScene.swift in Sources */,
+				3F2840861DDD18D70027DD93 /* GameData.swift in Sources */,
+				3F2840841DDD18710027DD93 /* HomeScene.swift in Sources */,
 				3F7C5B181DD3BCF700392A91 /* GameViewController.swift in Sources */,
+				3F2840881DDD228C0027DD93 /* GameOverScene.swift in Sources */,
 				3F7C5B101DD3BCF600392A91 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,10 +299,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P5F2W7RU5W;
+				DEVELOPMENT_TEAM = V3GKW447FR;
 				INFOPLIST_FILE = FingerBall/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.finger.FingerBall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sideloadfinger.FingerBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -300,10 +312,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P5F2W7RU5W;
+				DEVELOPMENT_TEAM = V3GKW447FR;
 				INFOPLIST_FILE = FingerBall/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.finger.FingerBall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sideloadfinger.FingerBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -10,26 +10,17 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+var sceneManager:UIViewController?
+
 class GameViewController: UIViewController {
 
+    let screenSize = CGSize(width: 1080, height: 1920) // iPhone 6+, 16:9 (1.77) aspect ratio
+    let scaleMode = SKSceneScaleMode.aspectFill
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        loadHomeScene()
+        sceneManager = self
     }
 
     override var shouldAutorotate: Bool {
@@ -51,5 +42,36 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func loadGameScene(){
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "GameScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    func loadHomeScene(){
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            let scene = HomeScene(size:screenSize, scaleMode:scaleMode, sceneManager:self )
+            view.presentScene(scene)
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
     }
 }
