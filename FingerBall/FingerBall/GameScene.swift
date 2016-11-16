@@ -16,8 +16,12 @@ class GameScene: SKScene {
     private var ball: SKSpriteNode?
     
     private var ballHit : Bool?
-    private var leftFlipped : Bool?
-    private var rightFlipped : Bool?
+    
+    private var maxLeftRotate : CGFloat = 0.7
+    private var minLeftRotate : CGFloat = -0.35
+    
+    private var maxRightRotate : CGFloat = -0.7
+    private var minRightRotate : CGFloat = 0.35
     
     override func didMove(to view: SKView) {
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
@@ -25,40 +29,27 @@ class GameScene: SKScene {
         ball = self.childNode(withName: "Ball") as? SKSpriteNode
         
         ballHit = false;
-        leftFlipped = false;
-        rightFlipped = false;
     }
     
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if pos.y < UIScreen.main.bounds.height * 0.8{
-            if pos.x < UIScreen.main.bounds.width * 0.5 && leftFlipped == false {
-                //Left bumper
-                let rotateLeftUp = SKAction.rotate(byAngle: 1, duration: 0.06)
-                rotateLeftUp.timingMode = SKActionTimingMode.easeOut
-                let rotateLeftDown = SKAction.rotate(byAngle: -1, duration: 0.06)
-                rotateLeftDown.timingMode = SKActionTimingMode.easeOut
-                leftFlipper?.run(rotateLeftUp, completion: {
-                    self.leftFlipper?.run(rotateLeftDown, completion:
-                        {self.leftFlipped = false})
-                })
+        
+        if pos.y < -550{
+            if pos.x < -25{
+                leftFlipper?.zRotation = minLeftRotate
+                leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                leftFlipper?.physicsBody?.applyTorque(CGFloat(15000000))
             }
-            else if pos.x > UIScreen.main.bounds.width * 0.5 && rightFlipped == false {
-                 //Right bumper
-                let rotateRightUp = SKAction.rotate(byAngle: -1, duration: 0.06)
-                rotateRightUp.timingMode = SKActionTimingMode.easeOut
-                let rotateRightDown = SKAction.rotate(byAngle: 1, duration: 0.06)
-                rotateRightDown.timingMode = SKActionTimingMode.easeOut
-                rightFlipper?.run(rotateRightUp, completion: {
-                    self.rightFlipper?.run(rotateRightDown, completion:
-                        {self.rightFlipped = false})
-                })
+            else {
+                rightFlipper?.zRotation = minRightRotate
+                rightFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                rightFlipper?.physicsBody?.applyTorque(CGFloat(-15000000))
             }
         }
-        let touchedNode = self.nodes(at: pos)
-        if touchedNode.count > 0{
-            for node in touchedNode {
+        let touchedNodes = self.nodes(at: pos)
+        if touchedNodes.count > 0{
+            for node in touchedNodes {
                 if node.name == "Bumper"{
                     node.alpha = 1
                     node.physicsBody = SKPhysicsBody(circleOfRadius: node.frame.width / 2.2)
@@ -71,17 +62,45 @@ class GameScene: SKScene {
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        
+        if pos.y > -550{
+        let nodesUnderFinger = self.nodes(at: pos)
+        if nodesUnderFinger.count > 0{
+            enumerateChildNodes(withName: "Bumper", using:
+                { (node, stop) -> Void in
+                    if !nodesUnderFinger.contains(node) {
+                        node.alpha = 0.3
+                        node.physicsBody = nil
+                    }
+                })
+            }
+        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        for node in self.children {
-            if node.name == "Bumper"{
-                node.alpha = 0.3
-                node.physicsBody = nil
+        if pos.y < -550{
+            print(pos.x)
+            if pos.x < -25{
+                leftFlipper?.zRotation = maxLeftRotate
+                leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                leftFlipper?.physicsBody?.applyTorque(CGFloat(-10000000))
+            }
+            else{
+                rightFlipper?.zRotation = maxRightRotate
+                rightFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                rightFlipper?.physicsBody?.applyTorque(CGFloat(10000000))
+                
             }
         }
         
+        let releasedNodes = self.nodes(at: pos)
+        if releasedNodes.count > 0{
+            for node in releasedNodes {
+                if node.name == "Bumper"{
+                    node.alpha = 0.3
+                    node.physicsBody = nil
+                }
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -102,13 +121,22 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        if (leftFlipper?.zRotation)! > CGFloat(maxLeftRotate){
+            leftFlipper?.zRotation = maxLeftRotate
+            leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        }
+        if (leftFlipper?.zRotation)! < CGFloat(minLeftRotate){
+            leftFlipper?.zRotation = minLeftRotate
+            leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        }
         
-        
-        //CHECK FOR COLLISIONS WITH FLIPPERS WHILE THEY ARE FLIPPED. IF SO, SET BALL HIT TO TRUE
-        if ballHit == true{
-            self.ball?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
-            ballHit = false
+        if (rightFlipper?.zRotation)! < CGFloat(maxRightRotate){
+            rightFlipper?.zRotation = maxRightRotate
+            rightFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        }
+        if (rightFlipper?.zRotation)! > CGFloat(minRightRotate){
+            rightFlipper?.zRotation = minRightRotate
+            rightFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         }
     }
     
@@ -122,20 +150,6 @@ class GameScene: SKScene {
     }
     
     func collisionBetween(ball: SKNode, other: SKNode){
-        switch other.name!{
-            case "RightCollider":
-                if rightFlipped == true{
-                    ballHit = true
-                }
-                break
-            
-            case "LeftCollider":
-                if leftFlipped == true{
-                    ballHit = true
-                }
-                break
-            
-            default: break
-        }
+
     }
 }
