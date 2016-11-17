@@ -23,6 +23,13 @@ class GameScene: SKScene {
     private var maxRightRotate : CGFloat = -0.7
     private var minRightRotate : CGFloat = 0.35
     
+    private var lives = 3
+    private var timer = 0.0
+    
+    var lastUpdateTime: TimeInterval = 0
+    var dt: TimeInterval = 0
+    var ballInterval = 10.0
+    
     override func didMove(to view: SKView) {
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
         rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
@@ -121,6 +128,13 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
+        calculateDeltaTime(currentTime: currentTime)
+        timer += dt
+        if(timer > ballInterval)
+        {
+            //spawn new ball
+            timer = 0.0
+        }
         if (leftFlipper?.zRotation)! > CGFloat(maxLeftRotate){
             leftFlipper?.zRotation = maxLeftRotate
             leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -147,6 +161,17 @@ class GameScene: SKScene {
         else if contact.bodyB.node?.name == "Ball"{
             collisionBetween(ball: contact.bodyB.node!, other: contact.bodyA.node!)
         }
+    }
+    
+    //Calculate time since last cycle
+    func calculateDeltaTime(currentTime: TimeInterval){
+        if lastUpdateTime > 0 {
+            dt = currentTime - lastUpdateTime
+        }
+        else{
+            dt = 0
+        }
+        lastUpdateTime = currentTime
     }
     
     func collisionBetween(ball: SKNode, other: SKNode){
