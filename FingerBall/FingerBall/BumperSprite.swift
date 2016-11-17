@@ -11,6 +11,8 @@ import SpriteKit
 
 class BumperSprite : SKSpriteNode{
     
+    var strength : CGFloat = 100.0
+    
     init() {
         let texture = SKTexture(imageNamed: "ball")
         super.init(texture: texture, color: SKColor.white, size: texture.size())
@@ -22,10 +24,20 @@ class BumperSprite : SKSpriteNode{
     
     func didBegin(_ contact: SKPhysicsContact){
         if contact.bodyA.node?.name == "Ball"{
-            collisionBetween(ball: contact.bodyA.node!, other: contact.bodyB.node!)
+            if contact.bodyB.node?.name == "Bumper"{
+                repelBall(ball: (contact.bodyA.node as! SKSpriteNode?)!, bumper: (contact.bodyB.node as! BumperSprite?)!)
+            }
         }
         else if contact.bodyB.node?.name == "Ball"{
-            collisionBetween(ball: contact.bodyB.node!, other: contact.bodyA.node!)
+            if contact.bodyA.node?.name == "Bumper"{
+                repelBall(ball: (contact.bodyB.node as! SKSpriteNode?)!, bumper: (contact.bodyA.node as! BumperSprite?)!)
+            }
         }
+    }
+    
+    func repelBall(ball: SKSpriteNode, bumper: BumperSprite){
+        var direction = CGVector(dx: ball.position.x - bumper.position.x, dy: ball.position.y - bumper.position.y)
+        direction = direction.normalize()
+        ball.physicsBody?.applyImpulse(direction * strength)
     }
 }

@@ -21,6 +21,7 @@
 		3FBC5D241DDD3C3D0051EB5A /* Trail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FBC5D231DDD3C3D0051EB5A /* Trail.sks */; };
 		3FBC5D261DDD3C700051EB5A /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FBC5D251DDD3C700051EB5A /* Explosion.sks */; };
 		3FBC5D281DDD3D1A0051EB5A /* BumperSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC5D271DDD3D1A0051EB5A /* BumperSprite.swift */; };
+		3FBC5D2A1DDD41140051EB5A /* CGVectorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC5D291DDD41140051EB5A /* CGVectorUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		3FBC5D231DDD3C3D0051EB5A /* Trail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Trail.sks; sourceTree = "<group>"; };
 		3FBC5D251DDD3C700051EB5A /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		3FBC5D271DDD3D1A0051EB5A /* BumperSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumperSprite.swift; sourceTree = "<group>"; };
+		3FBC5D291DDD41140051EB5A /* CGVectorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVectorUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				3F7C5B1E1DD3BCF800392A91 /* LaunchScreen.storyboard */,
 				3F7C5B211DD3BCF800392A91 /* Info.plist */,
 				3F2840851DDD18D70027DD93 /* GameData.swift */,
+				3FBC5D291DDD41140051EB5A /* CGVectorUtils.swift */,
 			);
 			path = FingerBall;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				3F2840861DDD18D70027DD93 /* GameData.swift in Sources */,
 				3F2840841DDD18710027DD93 /* HomeScene.swift in Sources */,
 				3F7C5B181DD3BCF700392A91 /* GameViewController.swift in Sources */,
+				3FBC5D2A1DDD41140051EB5A /* CGVectorUtils.swift in Sources */,
 				3FBC5D281DDD3D1A0051EB5A /* BumperSprite.swift in Sources */,
 				3F2840881DDD228C0027DD93 /* GameOverScene.swift in Sources */,
 				3F7C5B101DD3BCF600392A91 /* AppDelegate.swift in Sources */,
