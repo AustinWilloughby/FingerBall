@@ -14,6 +14,8 @@ class GameScene: SKScene {
     private var leftFlipper : SKSpriteNode?
     private var rightFlipper : SKSpriteNode?
     private var ballSpawn : SKSpriteNode?
+    private var livesLabel: SKLabelNode?
+    private var scoreLabel: SKLabelNode?
     
     private var maxLeftRotate : CGFloat = 0.7
     private var minLeftRotate : CGFloat = -0.35
@@ -21,7 +23,7 @@ class GameScene: SKScene {
     private var maxRightRotate : CGFloat = -0.7
     private var minRightRotate : CGFloat = 0.35
     
-    private var lives = 2
+    private var lives = 3
     private var timer = 9.0
     
     var lastUpdateTime: TimeInterval = 0
@@ -32,6 +34,8 @@ class GameScene: SKScene {
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
         rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
         ballSpawn = self.childNode(withName: "BallSpawn") as? SKSpriteNode
+        livesLabel = self.childNode(withName: "LivesLabel") as? SKLabelNode
+        scoreLabel = self.childNode(withName: "ScoreLabel") as? SKLabelNode
     }
     
     
@@ -200,6 +204,7 @@ class GameScene: SKScene {
     func removeBall(node: SKNode)
     {
         lives -= 1
+        livesLabel?.text = "Lives: \(lives)"
         if let emit = SKEmitterNode(fileNamed: "Explosion.sks"){
             emit.position = node.position
             addChild(emit)
