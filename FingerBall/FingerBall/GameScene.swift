@@ -13,9 +13,7 @@ class GameScene: SKScene {
     
     private var leftFlipper : SKSpriteNode?
     private var rightFlipper : SKSpriteNode?
-    private var ball: SKSpriteNode?
-    
-    private var ballHit : Bool?
+    private var ballSpawn : SKSpriteNode?
     
     private var maxLeftRotate : CGFloat = 0.7
     private var minLeftRotate : CGFloat = -0.35
@@ -24,21 +22,16 @@ class GameScene: SKScene {
     private var minRightRotate : CGFloat = 0.35
     
     private var lives = 2
-    private var timer = 0.0
+    private var timer = 9.0
     
     var lastUpdateTime: TimeInterval = 0
-    var dt: TimeInterval = 0
+    var dt: TimeInterval = 0.5
     var ballInterval = 10.0
     
     override func didMove(to view: SKView) {
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
         rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
-        ball = self.childNode(withName: "Ball") as? SKSpriteNode
-        let trail = SKEmitterNode(fileNamed: "Trail.sks")
-        trail?.targetNode = self
-        ball?.addChild(trail!)
-        
-        ballHit = false;
+        ballSpawn = self.childNode(withName: "BallSpawn") as? SKSpriteNode
     }
     
     
@@ -88,7 +81,6 @@ class GameScene: SKScene {
     
     func touchUp(atPoint pos : CGPoint) {
         if pos.y < -550{
-            print(pos.x)
             if pos.x < -25{
                 leftFlipper?.zRotation = maxLeftRotate
                 leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -133,9 +125,24 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         calculateDeltaTime(currentTime: currentTime)
         timer += dt
+        
         if(timer > ballInterval)
         {
-            //spawn new ball
+            let newBall = ballSpawn?.copy() as! SKSpriteNode?
+            if(newBall != nil){
+                newBall?.name = "Ball"
+                let fadeIn = SKAction.fadeIn(withDuration: 1.0)
+                newBall?.run(fadeIn, completion: {
+                    newBall?.physicsBody?.allowsRotation = true
+                    newBall?.physicsBody?.affectedByGravity = true
+                    newBall?.physicsBody?.isDynamic = true
+                    newBall?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
+                })
+                addChild(newBall!)
+                let trail = SKEmitterNode(fileNamed: "Trail.sks")
+                trail?.targetNode = self
+                newBall?.addChild(trail!)
+            }
             timer = 0.0
         }
         
@@ -146,6 +153,7 @@ class GameScene: SKScene {
                     self.removeBall(node: node)
                 }
         })
+
         if (leftFlipper?.zRotation)! > CGFloat(maxLeftRotate){
             leftFlipper?.zRotation = maxLeftRotate
             leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
