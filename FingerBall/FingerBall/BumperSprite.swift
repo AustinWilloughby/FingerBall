@@ -22,6 +22,8 @@ class BumperSprite : SKSpriteNode{
         fatalError("init(coder:) has not been implemented")
     }
     
+
+    
     func didBegin(_ contact: SKPhysicsContact){
         if contact.bodyA.node?.name == "Ball"{
             if contact.bodyB.node?.name == "Bumper"{
