@@ -30,7 +30,7 @@ class GameOverScene: SKScene {
         let label2 = SKLabelNode(fontNamed: "AvenirNextCondensed-HeavyItalic")
         
         label2.text = "Game Over"
-        label2.fontSize = 250
+        label2.fontSize = 200
         label2.position = CGPoint(x:size.width/2, y:size.height/2 + 100)
         label2.zPosition = 1
         addChild(label2)
@@ -46,7 +46,6 @@ class GameOverScene: SKScene {
     }
     
     override func touchesBegan(_ touchces: Set<UITouch>, with event: UIEvent?){
-        print("yup")
-        sceneManager.loadGameScene()
+        sceneManager.loadHomeScene()
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-var sceneManager:UIViewController?
+var sceneManager:GameViewController?
 
 class GameViewController: UIViewController {
 
@@ -66,6 +66,19 @@ class GameViewController: UIViewController {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             let scene = HomeScene(size:screenSize, scaleMode:scaleMode, sceneManager:self )
+            view.presentScene(scene)
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    func loadGameOverScene(){
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            let scene = GameOverScene(size:screenSize, scaleMode:scaleMode, sceneManager:self )
             view.presentScene(scene)
             
             view.ignoresSiblingOrder = true

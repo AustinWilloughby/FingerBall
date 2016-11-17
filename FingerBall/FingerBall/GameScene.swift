@@ -23,7 +23,7 @@ class GameScene: SKScene {
     private var maxRightRotate : CGFloat = -0.7
     private var minRightRotate : CGFloat = 0.35
     
-    private var lives = 3
+    private var lives = 2
     private var timer = 0.0
     
     var lastUpdateTime: TimeInterval = 0
@@ -34,6 +34,9 @@ class GameScene: SKScene {
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
         rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
         ball = self.childNode(withName: "Ball") as? SKSpriteNode
+        let trail = SKEmitterNode(fileNamed: "Trail.sks")
+        trail?.targetNode = self
+        ball?.addChild(trail!)
         
         ballHit = false;
     }
@@ -135,6 +138,14 @@ class GameScene: SKScene {
             //spawn new ball
             timer = 0.0
         }
+        
+        enumerateChildNodes(withName: "Ball", using:
+            { (node, stop) -> Void in
+                if(node.position.y < -1000)
+                {
+                    self.removeBall(node: node)
+                }
+        })
         if (leftFlipper?.zRotation)! > CGFloat(maxLeftRotate){
             leftFlipper?.zRotation = maxLeftRotate
             leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -176,5 +187,19 @@ class GameScene: SKScene {
     
     func collisionBetween(ball: SKNode, other: SKNode){
 
+    }
+    
+    func removeBall(node: SKNode)
+    {
+        lives -= 1
+        if let emit = SKEmitterNode(fileNamed: "Explosion.sks"){
+            emit.position = node.position
+            addChild(emit)
+        }
+        if(lives <= 0)
+        {
+            sceneManager?.loadGameOverScene()
+        }
+        node.removeFromParent()
     }
 }
