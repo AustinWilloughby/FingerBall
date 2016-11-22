@@ -11,6 +11,10 @@
 		3F2840861DDD18D70027DD93 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2840851DDD18D70027DD93 /* GameData.swift */; };
 		3F2840881DDD228C0027DD93 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2840871DDD228C0027DD93 /* GameOverScene.swift */; };
 		3F4011571DE4D0A4001EDC6C /* Hit.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F4011561DE4D0A4001EDC6C /* Hit.sks */; };
+		3F40115C1DE4D498001EDC6C /* Explosion6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F4011581DE4D498001EDC6C /* Explosion6.mp3 */; };
+		3F40115D1DE4D498001EDC6C /* Hit_Hurt6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F4011591DE4D498001EDC6C /* Hit_Hurt6.mp3 */; };
+		3F40115E1DE4D498001EDC6C /* Laser_Shoot35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F40115A1DE4D498001EDC6C /* Laser_Shoot35.mp3 */; };
+		3F40115F1DE4D498001EDC6C /* Powerup5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F40115B1DE4D498001EDC6C /* Powerup5.mp3 */; };
 		3F41B8451DE4CB1500DA1093 /* GameScene3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F41B8441DE4CB1500DA1093 /* GameScene3.sks */; };
 		3F7C5B101DD3BCF600392A91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C5B0F1DD3BCF600392A91 /* AppDelegate.swift */; };
 		3F7C5B121DD3BCF700392A91 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C5B111DD3BCF700392A91 /* GameScene.sks */; };
@@ -34,6 +38,10 @@
 		3F2840851DDD18D70027DD93 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		3F2840871DDD228C0027DD93 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		3F4011561DE4D0A4001EDC6C /* Hit.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Hit.sks; sourceTree = "<group>"; };
+		3F4011581DE4D498001EDC6C /* Explosion6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Explosion6.mp3; sourceTree = "<group>"; };
+		3F4011591DE4D498001EDC6C /* Hit_Hurt6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hit_Hurt6.mp3; sourceTree = "<group>"; };
+		3F40115A1DE4D498001EDC6C /* Laser_Shoot35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Laser_Shoot35.mp3; sourceTree = "<group>"; };
+		3F40115B1DE4D498001EDC6C /* Powerup5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Powerup5.mp3; sourceTree = "<group>"; };
 		3F41B8441DE4CB1500DA1093 /* GameScene3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene3.sks; sourceTree = "<group>"; };
 		3F7C5B0C1DD3BCF600392A91 /* FingerBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FingerBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7C5B0F1DD3BCF600392A91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +96,10 @@
 		3F7C5B0E1DD3BCF600392A91 /* FingerBall */ = {
 			isa = PBXGroup;
 			children = (
+				3F4011581DE4D498001EDC6C /* Explosion6.mp3 */,
+				3F4011591DE4D498001EDC6C /* Hit_Hurt6.mp3 */,
+				3F40115A1DE4D498001EDC6C /* Laser_Shoot35.mp3 */,
+				3F40115B1DE4D498001EDC6C /* Powerup5.mp3 */,
 				3F7C5B0F1DD3BCF600392A91 /* AppDelegate.swift */,
 				3F7C5B171DD3BCF700392A91 /* GameViewController.swift */,
 				3F7C5B271DD3BD3700392A91 /* Scenes */,
@@ -106,14 +118,14 @@
 			children = (
 				3F7C5B131DD3BCF700392A91 /* Actions.sks */,
 				3F7C5B111DD3BCF700392A91 /* GameScene.sks */,
+				3FD871161DE4C4B8005182FA /* GameScene2.sks */,
+				3F41B8441DE4CB1500DA1093 /* GameScene3.sks */,
 				3F7C5B151DD3BCF700392A91 /* GameScene.swift */,
 				3F2840831DDD18710027DD93 /* HomeScene.swift */,
 				3F2840871DDD228C0027DD93 /* GameOverScene.swift */,
 				3FBC5D271DDD3D1A0051EB5A /* BumperSprite.swift */,
 				3FD871121DE4BDF0005182FA /* LevelSelect.swift */,
 				3FD871141DE4BF6C005182FA /* LevelSelect.sks */,
-				3FD871161DE4C4B8005182FA /* GameScene2.sks */,
-				3F41B8441DE4CB1500DA1093 /* GameScene3.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -202,13 +214,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FBC5D241DDD3C3D0051EB5A /* Trail.sks in Resources */,
+				3F40115F1DE4D498001EDC6C /* Powerup5.mp3 in Resources */,
 				3F7C5B1B1DD3BCF700392A91 /* Main.storyboard in Resources */,
 				3F41B8451DE4CB1500DA1093 /* GameScene3.sks in Resources */,
 				3F4011571DE4D0A4001EDC6C /* Hit.sks in Resources */,
+				3F40115D1DE4D498001EDC6C /* Hit_Hurt6.mp3 in Resources */,
 				3F7C5B121DD3BCF700392A91 /* GameScene.sks in Resources */,
 				3F7C5B1D1DD3BCF800392A91 /* Assets.xcassets in Resources */,
 				3F7C5B201DD3BCF800392A91 /* LaunchScreen.storyboard in Resources */,
+				3F40115C1DE4D498001EDC6C /* Explosion6.mp3 in Resources */,
 				3FBC5D261DDD3C700051EB5A /* Explosion.sks in Resources */,
+				3F40115E1DE4D498001EDC6C /* Laser_Shoot35.mp3 in Resources */,
 				3FD871151DE4BF6C005182FA /* LevelSelect.sks in Resources */,
 				3F7C5B141DD3BCF700392A91 /* Actions.sks in Resources */,
 				3FD871171DE4C4B8005182FA /* GameScene2.sks in Resources */,

@@ -25,10 +25,12 @@ class LevelSelect: SKScene {
         level3 = self.childNode(withName: "Level3") as? SKShapeNode
     }
     
+    //touch event
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
+    //which button is touched
     func touchDown(atPoint pos : CGPoint) {
         let touchedNodes = self.nodes(at: pos)
         if touchedNodes.count > 0{

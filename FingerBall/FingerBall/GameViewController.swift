@@ -128,10 +128,10 @@ class GameViewController: UIViewController {
         }
     }
     
-    func loadGameOverScene(){
+    func loadGameOverScene(score:CGFloat){
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            let scene = GameOverScene(size:screenSize, scaleMode:scaleMode, sceneManager:self )
+            let scene = GameOverScene(size:screenSize, scaleMode:scaleMode, sceneManager:self, score:score )
             view.presentScene(scene)
             
             view.ignoresSiblingOrder = true

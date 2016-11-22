@@ -12,10 +12,12 @@ class GameOverScene: SKScene {
     // MARK: - ivars -
     let sceneManager:GameViewController
     let button:SKLabelNode = SKLabelNode(fontNamed: GameData.font.mainFont)
+    var levelScore:CGFloat
     
     // MARK: - Initialization -
-    init(size: CGSize, scaleMode:SKSceneScaleMode, sceneManager:GameViewController){
+    init(size: CGSize, scaleMode:SKSceneScaleMode, sceneManager:GameViewController, score:CGFloat){
         self.sceneManager = sceneManager
+        self.levelScore = score
         super.init(size: size)
         self.scaleMode = scaleMode
     }
@@ -39,10 +41,14 @@ class GameOverScene: SKScene {
         label4.text = "Tap to Play Again"
         label4.fontColor = UIColor.lightGray
         label4.fontSize = 70
-        label4.position = CGPoint(x:size.width/2, y:size.height/2 - 700)
+        label4.position = CGPoint(x:size.width/2, y:size.height/2 - 800)
         addChild(label4)
         
-        
+        let scoreLabel = SKLabelNode(fontNamed: GameData.font.mainFont)
+        scoreLabel.text = "Final Score: \(levelScore)"
+        scoreLabel.fontSize = 100
+        scoreLabel.position = CGPoint(x:size.width/2, y:size.height/2 - 100)
+        addChild(scoreLabel)
     }
     
     override func touchesBegan(_ touchces: Set<UITouch>, with event: UIEvent?){

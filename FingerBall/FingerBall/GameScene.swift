@@ -211,13 +211,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //If a contact happens
     func didBegin(_ contact: SKPhysicsContact){
-        
         //Handle ball and bumper contact
         if contact.bodyA.node?.name == "Ball"{
             if contact.bodyB.node?.name == "Bumper"{
                 let bumper = contact.bodyB.node as! BumperSprite
                 bumper.repelBall(ball: contact.bodyA.node as! SKSpriteNode)
                 score += 10
+                if let emit = SKEmitterNode(fileNamed: "Hit.sks"){
+                    emit.position = contact.contactPoint
+                    addChild(emit)
+                }
             }
         }
         else if contact.bodyB.node?.name == "Ball"{
@@ -225,6 +228,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let bumper = contact.bodyA.node as! BumperSprite
                 bumper.repelBall(ball: contact.bodyB.node as! SKSpriteNode)
                 score += 10
+                if let emit = SKEmitterNode(fileNamed: "Hit.sks"){
+                    emit.position = contact.contactPoint
+                    addChild(emit)
+                }
             }
         }
     }
@@ -251,8 +258,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(emit)
         }
         if(lives <= 0)
-        {
-            sceneManager?.loadGameOverScene()
+        {//no lives left game over
+            sceneManager?.loadGameOverScene(score:CGFloat(score))
         }
         node.removeFromParent()
         
