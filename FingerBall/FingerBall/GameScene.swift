@@ -8,8 +8,9 @@
 
 import SpriteKit
 import GameplayKit
+import Foundation
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var leftFlipper : SKSpriteNode?
     private var rightFlipper : SKSpriteNode?
@@ -25,6 +26,12 @@ class GameScene: SKScene {
     
     private var lives = 3
     private var timer = 9.0
+    private var score = 0 {
+        didSet{
+            let scoreString = String(format: "%06d", score)
+            scoreLabel?.text = "Score: " + scoreString
+        }
+    }
     
     var lastUpdateTime: TimeInterval = 0
     var dt: TimeInterval = 0.5
@@ -36,6 +43,10 @@ class GameScene: SKScene {
         ballSpawn = self.childNode(withName: "BallSpawn") as? SKSpriteNode
         livesLabel = self.childNode(withName: "LivesLabel") as? SKLabelNode
         scoreLabel = self.childNode(withName: "ScoreLabel") as? SKLabelNode
+        
+        leftFlipper?.physicsBody?.usesPreciseCollisionDetection = true
+        rightFlipper?.physicsBody?.usesPreciseCollisionDetection = true
+        self.physicsWorld.contactDelegate = self
     }
     
     
@@ -58,11 +69,8 @@ class GameScene: SKScene {
         if touchedNodes.count > 0{
             for node in touchedNodes {
                 if node.name == "Bumper"{
-                    node.alpha = 1
-                    node.physicsBody = SKPhysicsBody(circleOfRadius: node.frame.width / 2.2)
-                    node.physicsBody?.isDynamic = false
-                    node.physicsBody?.affectedByGravity = false
-                    node.physicsBody?.allowsRotation = false
+                    let bumper = node as! BumperSprite
+                    bumper.activateBumper()
                 }
             }
         }
@@ -75,8 +83,8 @@ class GameScene: SKScene {
             enumerateChildNodes(withName: "Bumper", using:
                 { (node, stop) -> Void in
                     if !nodesUnderFinger.contains(node) {
-                        node.alpha = 0.3
-                        node.physicsBody = nil
+                        let bumper = node as! BumperSprite
+                        bumper.deactivateBumper()
                     }
                 })
             }
@@ -102,8 +110,9 @@ class GameScene: SKScene {
         if releasedNodes.count > 0{
             for node in releasedNodes {
                 if node.name == "Bumper"{
-                    node.alpha = 0.3
-                    node.physicsBody = nil
+                    let bumper = node as! BumperSprite
+                    bumper.deactivateBumper()
+                    
                 }
             }
         }
@@ -137,6 +146,9 @@ class GameScene: SKScene {
                 newBall?.name = "Ball"
                 let fadeIn = SKAction.fadeIn(withDuration: 1.0)
                 newBall?.run(fadeIn, completion: {
+                    newBall?.physicsBody?.categoryBitMask = CollisionMask.projectile
+                    newBall?.physicsBody?.contactTestBitMask = CollisionMask.all
+                    newBall?.physicsBody?.usesPreciseCollisionDetection = true
                     newBall?.physicsBody?.allowsRotation = true
                     newBall?.physicsBody?.affectedByGravity = true
                     newBall?.physicsBody?.isDynamic = true
@@ -179,10 +191,18 @@ class GameScene: SKScene {
     
     func didBegin(_ contact: SKPhysicsContact){
         if contact.bodyA.node?.name == "Ball"{
-            collisionBetween(ball: contact.bodyA.node!, other: contact.bodyB.node!)
+            if contact.bodyB.node?.name == "Bumper"{
+                let bumper = contact.bodyB.node as! BumperSprite
+                bumper.repelBall(ball: contact.bodyA.node as! SKSpriteNode)
+                score += 10
+            }
         }
         else if contact.bodyB.node?.name == "Ball"{
-            collisionBetween(ball: contact.bodyB.node!, other: contact.bodyA.node!)
+            if contact.bodyA.node?.name == "Bumper"{
+                let bumper = contact.bodyA.node as! BumperSprite
+                bumper.repelBall(ball: contact.bodyB.node as! SKSpriteNode)
+                score += 10
+            }
         }
     }
     
@@ -195,10 +215,6 @@ class GameScene: SKScene {
             dt = 0
         }
         lastUpdateTime = currentTime
-    }
-    
-    func collisionBetween(ball: SKNode, other: SKNode){
-
     }
     
     func removeBall(node: SKNode)

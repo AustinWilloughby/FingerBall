@@ -11,7 +11,7 @@ import SpriteKit
 
 class BumperSprite : SKSpriteNode{
     
-    var strength : CGFloat = 100.0
+    var strength : CGFloat = 150.0
     
     init() {
         let texture = SKTexture(imageNamed: "ball")
@@ -19,27 +19,28 @@ class BumperSprite : SKSpriteNode{
     }
     
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)!
     }
     
-
-    
-    func didBegin(_ contact: SKPhysicsContact){
-        if contact.bodyA.node?.name == "Ball"{
-            if contact.bodyB.node?.name == "Bumper"{
-                repelBall(ball: (contact.bodyA.node as! SKSpriteNode?)!, bumper: (contact.bodyB.node as! BumperSprite?)!)
-            }
-        }
-        else if contact.bodyB.node?.name == "Ball"{
-            if contact.bodyA.node?.name == "Bumper"{
-                repelBall(ball: (contact.bodyB.node as! SKSpriteNode?)!, bumper: (contact.bodyA.node as! BumperSprite?)!)
-            }
-        }
-    }
-    
-    func repelBall(ball: SKSpriteNode, bumper: BumperSprite){
-        var direction = CGVector(dx: ball.position.x - bumper.position.x, dy: ball.position.y - bumper.position.y)
+    func repelBall(ball: SKSpriteNode){
+        var direction = CGVector(dx: ball.position.x - position.x, dy: ball.position.y - position.y)
         direction = direction.normalize()
         ball.physicsBody?.applyImpulse(direction * strength)
+    }
+    
+    func activateBumper(){
+        alpha = 1
+        physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2.2)
+        physicsBody?.contactTestBitMask = CollisionMask.all
+        physicsBody?.categoryBitMask = CollisionMask.button
+        physicsBody?.collisionBitMask = CollisionMask.all
+        physicsBody?.isDynamic = false
+        physicsBody?.affectedByGravity = false
+        physicsBody?.allowsRotation = false
+    }
+    
+    func deactivateBumper(){
+        alpha = 0.3
+        physicsBody = nil
     }
 }
