@@ -18,6 +18,10 @@
 		3F7C5B1B1DD3BCF700392A91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C5B191DD3BCF700392A91 /* Main.storyboard */; };
 		3F7C5B1D1DD3BCF800392A91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C5B1C1DD3BCF800392A91 /* Assets.xcassets */; };
 		3F7C5B201DD3BCF800392A91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C5B1E1DD3BCF800392A91 /* LaunchScreen.storyboard */; };
+		3FAE36A71DE4BEB200B7DA1C /* Explosion6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE36A31DE4BEB200B7DA1C /* Explosion6.mp3 */; };
+		3FAE36A81DE4BEB200B7DA1C /* Hit_Hurt6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE36A41DE4BEB200B7DA1C /* Hit_Hurt6.mp3 */; };
+		3FAE36A91DE4BEB200B7DA1C /* Laser_Shoot35.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE36A51DE4BEB200B7DA1C /* Laser_Shoot35.mp3 */; };
+		3FAE36AA1DE4BEB200B7DA1C /* Powerup5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE36A61DE4BEB200B7DA1C /* Powerup5.mp3 */; };
 		3FBC5D241DDD3C3D0051EB5A /* Trail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FBC5D231DDD3C3D0051EB5A /* Trail.sks */; };
 		3FBC5D261DDD3C700051EB5A /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FBC5D251DDD3C700051EB5A /* Explosion.sks */; };
 		3FBC5D281DDD3D1A0051EB5A /* BumperSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC5D271DDD3D1A0051EB5A /* BumperSprite.swift */; };
@@ -38,10 +42,10 @@
 		3F7C5B1C1DD3BCF800392A91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F7C5B1F1DD3BCF800392A91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F7C5B211DD3BCF800392A91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3FAE369D1DE4BA1700B7DA1C /* Explosion6.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Explosion6.m4a; sourceTree = "<group>"; };
-		3FAE369E1DE4BA1700B7DA1C /* Hit_Hurt6.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hit_Hurt6.m4a; sourceTree = "<group>"; };
-		3FAE369F1DE4BA1700B7DA1C /* Laser_Shoot35.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Laser_Shoot35.m4a; sourceTree = "<group>"; };
-		3FAE36A01DE4BA1700B7DA1C /* Powerup5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Powerup5.m4a; sourceTree = "<group>"; };
+		3FAE36A31DE4BEB200B7DA1C /* Explosion6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Explosion6.mp3; sourceTree = "<group>"; };
+		3FAE36A41DE4BEB200B7DA1C /* Hit_Hurt6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hit_Hurt6.mp3; sourceTree = "<group>"; };
+		3FAE36A51DE4BEB200B7DA1C /* Laser_Shoot35.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Laser_Shoot35.mp3; sourceTree = "<group>"; };
+		3FAE36A61DE4BEB200B7DA1C /* Powerup5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Powerup5.mp3; sourceTree = "<group>"; };
 		3FBC5D231DDD3C3D0051EB5A /* Trail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Trail.sks; sourceTree = "<group>"; };
 		3FBC5D251DDD3C700051EB5A /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		3FBC5D271DDD3D1A0051EB5A /* BumperSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumperSprite.swift; sourceTree = "<group>"; };
@@ -118,10 +122,10 @@
 		3FAE369C1DE4BA0C00B7DA1C /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				3FAE369D1DE4BA1700B7DA1C /* Explosion6.m4a */,
-				3FAE369E1DE4BA1700B7DA1C /* Hit_Hurt6.m4a */,
-				3FAE369F1DE4BA1700B7DA1C /* Laser_Shoot35.m4a */,
-				3FAE36A01DE4BA1700B7DA1C /* Powerup5.m4a */,
+				3FAE36A31DE4BEB200B7DA1C /* Explosion6.mp3 */,
+				3FAE36A41DE4BEB200B7DA1C /* Hit_Hurt6.mp3 */,
+				3FAE36A51DE4BEB200B7DA1C /* Laser_Shoot35.mp3 */,
+				3FAE36A61DE4BEB200B7DA1C /* Powerup5.mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -158,7 +162,7 @@
 				TargetAttributes = {
 					3F7C5B0B1DD3BCF600392A91 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = V3GKW447FR;
+						DevelopmentTeam = P5F2W7RU5W;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -189,9 +193,13 @@
 				3FBC5D241DDD3C3D0051EB5A /* Trail.sks in Resources */,
 				3F7C5B1B1DD3BCF700392A91 /* Main.storyboard in Resources */,
 				3F7C5B121DD3BCF700392A91 /* GameScene.sks in Resources */,
+				3FAE36A71DE4BEB200B7DA1C /* Explosion6.mp3 in Resources */,
+				3FAE36AA1DE4BEB200B7DA1C /* Powerup5.mp3 in Resources */,
 				3F7C5B1D1DD3BCF800392A91 /* Assets.xcassets in Resources */,
+				3FAE36A81DE4BEB200B7DA1C /* Hit_Hurt6.mp3 in Resources */,
 				3F7C5B201DD3BCF800392A91 /* LaunchScreen.storyboard in Resources */,
 				3FBC5D261DDD3C700051EB5A /* Explosion.sks in Resources */,
+				3FAE36A91DE4BEB200B7DA1C /* Laser_Shoot35.mp3 in Resources */,
 				3F7C5B141DD3BCF700392A91 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,10 +339,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = V3GKW447FR;
+				DEVELOPMENT_TEAM = P5F2W7RU5W;
 				INFOPLIST_FILE = FingerBall/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sideloadfinger.FingerBall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.finger.FingerBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -344,10 +352,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = V3GKW447FR;
+				DEVELOPMENT_TEAM = P5F2W7RU5W;
 				INFOPLIST_FILE = FingerBall/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sideloadfinger.FingerBall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.finger.FingerBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

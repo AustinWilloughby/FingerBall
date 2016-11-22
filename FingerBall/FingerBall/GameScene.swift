@@ -52,12 +52,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        
         if pos.y < -550{
+            run(SKAction.playSoundFileNamed("Hit_Hurt6.mp3", waitForCompletion: true))
             if pos.x < -25{
                 leftFlipper?.zRotation = minLeftRotate
                 leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
                 leftFlipper?.physicsBody?.applyTorque(CGFloat(15000000))
+                
             }
             else {
                 rightFlipper?.zRotation = minRightRotate
@@ -153,6 +154,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     newBall?.physicsBody?.affectedByGravity = true
                     newBall?.physicsBody?.isDynamic = true
                     newBall?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
+                    self.run(SKAction.playSoundFileNamed("Laser_Shoot35.mp3", waitForCompletion: true))
+
                 })
                 addChild(newBall!)
                 let trail = SKEmitterNode(fileNamed: "Trail.sks")
@@ -230,5 +233,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sceneManager?.loadGameOverScene()
         }
         node.removeFromParent()
+        
+        run(SKAction.playSoundFileNamed("Explosion6.mp3", waitForCompletion: true))
     }
 }
