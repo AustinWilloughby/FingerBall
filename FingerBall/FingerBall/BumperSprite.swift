@@ -14,6 +14,7 @@ class BumperSprite : SKSpriteNode{
     var strength : CGFloat = 150.0
     
     init() {
+        //Setup bumper
         let texture = SKTexture(imageNamed: "ball")
         super.init(texture: texture, color: SKColor.white, size: texture.size())
     }
@@ -23,6 +24,7 @@ class BumperSprite : SKSpriteNode{
     }
     
     func repelBall(ball: SKSpriteNode){
+        //Code to push ball from bumper
         var direction = CGVector(dx: ball.position.x - position.x, dy: ball.position.y - position.y)
         direction = direction.normalize()
         ball.physicsBody?.applyImpulse(direction * strength)
@@ -30,8 +32,10 @@ class BumperSprite : SKSpriteNode{
             emit.position = ball.position
             addChild(emit)
         }
+        run(SKAction.playSoundFileNamed("Powerup5.mp3", waitForCompletion: true))
     }
     
+    //Code for when the player activates a bumper
     func activateBumper(){
         alpha = 1
         physicsBody = SKPhysicsBody(circleOfRadius: frame.width / 2.2)
@@ -43,6 +47,7 @@ class BumperSprite : SKSpriteNode{
         physicsBody?.allowsRotation = false
     }
     
+    //Code for when a player deactivates a bumper
     func deactivateBumper(){
         alpha = 0.3
         physicsBody = nil
