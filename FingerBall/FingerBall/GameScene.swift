@@ -12,6 +12,7 @@ import Foundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    //iVars
     private var leftFlipper : SKSpriteNode?
     private var rightFlipper : SKSpriteNode?
     private var ballSpawn : SKSpriteNode?
@@ -28,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var timer = 9.0
     private var score = 0 {
         didSet{
+            //Update score label
             let scoreString = String(format: "%06d", score)
             scoreLabel?.text = "Score: " + scoreString
         }
@@ -37,7 +39,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var dt: TimeInterval = 0.5
     var ballInterval = 10.0
     
+    
+    
     override func didMove(to view: SKView) {
+        //Set up the connections to the SKS
         leftFlipper = self.childNode(withName: "LeftFlipper") as? SKSpriteNode
         rightFlipper = self.childNode(withName: "RightFlipper") as? SKSpriteNode
         ballSpawn = self.childNode(withName: "BallSpawn") as? SKSpriteNode
@@ -52,23 +57,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if pos.y < -550{
+        //If the player touches the screen
+        if pos.y < -550{ //At bottom
             run(SKAction.playSoundFileNamed("Hit_Hurt6.mp3", waitForCompletion: true))
-            if pos.x < -25{
+            if pos.x < -25{ //On left
                 leftFlipper?.zRotation = minLeftRotate
                 leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
                 leftFlipper?.physicsBody?.applyTorque(CGFloat(15000000))
                 
             }
-            else {
+            else { //On right
                 rightFlipper?.zRotation = minRightRotate
                 rightFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
                 rightFlipper?.physicsBody?.applyTorque(CGFloat(-15000000))
             }
         }
+        //If they touch, get the nodes
         let touchedNodes = self.nodes(at: pos)
         if touchedNodes.count > 0{
             for node in touchedNodes {
+                //Check for bumpers
                 if node.name == "Bumper"{
                     let bumper = node as! BumperSprite
                     bumper.activateBumper()
@@ -77,7 +85,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    //If the move their finger
     func touchMoved(toPoint pos : CGPoint) {
+        //Ensure they didnt drag off
         if pos.y > -550{
         let nodesUnderFinger = self.nodes(at: pos)
         if nodesUnderFinger.count > 0{
@@ -92,8 +102,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    //If they lift their finger
     func touchUp(atPoint pos : CGPoint) {
-        if pos.y < -550{
+        if pos.y < -550{ //Reset bumpers
             if pos.x < -25{
                 leftFlipper?.zRotation = maxLeftRotate
                 leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -107,6 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        //Release bumpers
         let releasedNodes = self.nodes(at: pos)
         if releasedNodes.count > 0{
             for node in releasedNodes {
@@ -140,6 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         calculateDeltaTime(currentTime: currentTime)
         timer += dt
         
+        //If its time to shoot a ball
         if(timer > ballInterval)
         {
             let newBall = ballSpawn?.copy() as! SKSpriteNode?
@@ -165,6 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             timer = 0.0
         }
         
+        //Check if balls are off screen
         enumerateChildNodes(withName: "Ball", using:
             { (node, stop) -> Void in
                 if(node.position.y < -1000)
@@ -173,6 +187,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
         })
 
+        
+        //Check that the flipper is within its bounds
         if (leftFlipper?.zRotation)! > CGFloat(maxLeftRotate){
             leftFlipper?.zRotation = maxLeftRotate
             leftFlipper?.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -192,7 +208,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    
+    //If a contact happens
     func didBegin(_ contact: SKPhysicsContact){
+        
+        //Handle ball and bumper contact
         if contact.bodyA.node?.name == "Ball"{
             if contact.bodyB.node?.name == "Bumper"{
                 let bumper = contact.bodyB.node as! BumperSprite
@@ -211,6 +231,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Calculate time since last cycle
     func calculateDeltaTime(currentTime: TimeInterval){
+        //Code by Tony Jefferson
         if lastUpdateTime > 0 {
             dt = currentTime - lastUpdateTime
         }
@@ -220,6 +241,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = currentTime
     }
     
+    //Handle removing ball from the screen
     func removeBall(node: SKNode)
     {
         lives -= 1
