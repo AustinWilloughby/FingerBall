@@ -62,11 +62,64 @@ class GameViewController: UIViewController {
         }
     }
     
-    func loadHomeScene(){
+    func loadGameSceneTwo(){
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "GameScene2") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    func loadGameSceneThree(){
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "GameScene3") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    func loadHomeScene(){
+        if let view = self.view as! SKView? {
             let scene = HomeScene(size:screenSize, scaleMode:scaleMode, sceneManager:self )
             view.presentScene(scene)
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
+    func loadLevelSelect(){
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "LevelSelect") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
             
             view.ignoresSiblingOrder = true
             

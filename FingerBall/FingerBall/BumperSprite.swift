@@ -26,6 +26,10 @@ class BumperSprite : SKSpriteNode{
         var direction = CGVector(dx: ball.position.x - position.x, dy: ball.position.y - position.y)
         direction = direction.normalize()
         ball.physicsBody?.applyImpulse(direction * strength)
+        if let emit = SKEmitterNode(fileNamed: "Hit.sks"){
+            emit.position = ball.position
+            addChild(emit)
+        }
     }
     
     func activateBumper(){

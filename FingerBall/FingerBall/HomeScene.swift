@@ -55,6 +55,6 @@ class HomeScene: SKScene {
     }
     
     override func touchesBegan(_ touchces: Set<UITouch>, with event: UIEvent?){
-        sceneManager.loadGameScene()
+        sceneManager.loadLevelSelect()
     }
 }
